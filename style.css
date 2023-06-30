@@ -1,0 +1,148 @@
+body{
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#title{
+  /*font*/
+  font-weight: bold;
+  font-size: 5vw;
+
+  /*Alignment*/
+  display: flex;
+  justify-content: center;
+}
+
+.calculator-container{
+  /*Alignment*/
+  display: flex;
+  justify-content: center;
+  margin: 8%;
+}
+
+.calculator-frame{
+  /*Colour*/
+  background-color: lightgray;
+
+  /*Dimension*/
+  height: 700px;
+  width: 500px;
+
+  /*Alignment*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /*Border*/
+  border: 3px solid #000000;
+  border-radius: 30px;
+}
+
+.calculator-display{
+  /*Colour*/
+  background-color: white;
+
+  /*Dimension*/
+  height: 25%;
+  width: 85%;
+
+  /*Alighment*/
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5%;
+
+  /*Border*/
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+
+/*Contains .clear-delete and .input-buttons*/
+.input-container{
+  /*Colour*/
+  background-color: lightgray;
+
+  /*Alignment*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  margin: 5%;
+
+  /*Dimension*/
+  height: 70%;
+  width: 90%;
+
+  /*Border*/
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+
+/*container for clear delete buttons*/
+.clear-delete{
+  /*Colour*/
+  background-color: lightgray;
+
+  /*Alignment*/
+  display: flex;
+  justify-content: center;
+
+  /*Dimension*/
+  height: 20%;
+  width: 100%;
+
+  /*Border*/
+  border: 2px solid #000000;
+  border-radius: 10px;
+}
+
+/*Container for numbers and operators*/
+.input-buttons{
+    /*Colour*/
+    background-color: lightgray;
+
+    /*Alignment*/
+    display: flex;
+    flex-direction: column;
+  
+    /*Dimension*/
+    height: 80%;
+    width: 100%;
+  
+    /*Border*/
+    border: 2px solid #000000;
+    border-radius: 10px;
+}
+
+.button{
+  /*Alignment*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vw;
+
+  /*Font*/
+  font-weight: bold;
+  font-size: 2vw;
+  font-family: sans-serif;
+
+  /*Border*/
+  border: 2px solid #000000;
+  border-radius: 10px;
+
+}
+
+button{
+  display: flex;
+  flex-grow: 1;
+}
+
+.row{
+  /*Alignment*/
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}

@@ -6,8 +6,6 @@ Raymond's Calculator Project Requirements:
 4) = sign evaluates user input and updates display with answer.
 5) Updated answer display can continue
 accepting inputs for further calculations.
-6) Can handle sequential operations such as 1 + 2 x 3.
-7) Evaulation respects BEDMAS
 8) Invalid input equation returns ERROR on display. 
 9) Decimal numbers are allowed.
 10) Cannot have 10.4.5 (disable decimal when one is active).
@@ -51,6 +49,7 @@ function operate(a, operator, b){
 
 var display = []; // Stores display output, default 0.
 
+
 // Process user input for updating display
 function userInput(button){
   let input = button.target.id // ID of Button. Type: string
@@ -59,6 +58,10 @@ function userInput(button){
     console.log(display);
   } else if(input == '='){
     evaluate(display);
+  } else if (input == 'CLEAR'){
+    clear();
+  } else if (input == "DELETE"){
+    Delete();
   }
   updateDisplay(display) // Show update on display.
 }
@@ -71,7 +74,8 @@ function updateDisplay(display){
   } else{
     output = display.join(""); // convert display to string as output
   }
-  console.log(output);
+  span = document.querySelector(".lower-display");
+  span.innerHTML = output;
 }
 
 // Evaluates display[] math and updates display accordingly. 
@@ -79,6 +83,17 @@ function evaluate(display){
 
 }
 
+// Clears display[] and updates display
+function clear(){
+  display = [];
+  updateDisplay(display);
+}
+
+// Deletes last input from display[] and updates display
+function Delete(){
+  display.pop();
+  updateDisplay(display);
+}
 /*Adds on click event listener to all buttons*/
 const btns = document.querySelectorAll("button");
 

@@ -8,7 +8,7 @@ body{
 #title{
   /*font*/
   font-weight: bold;
-  font-size: 5vw;
+  font-size: 50px;
 
   /*Alignment*/
   display: flex;
@@ -50,14 +50,32 @@ body{
 
   /*Alighment*/
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  flex-grow: 1;
   margin-top: 5%;
 
   /*Border*/
   border: 2px solid #000000;
   border-radius: 10px;
-}
 
+  /*Font*/
+  font-size: 50px;
+  font-weight: bold;
+}
+.upper-display{
+  font-size: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: start;
+  height: 30px;
+}
+.lower-display{
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+  margin-top: 20%;
+  height: 60px;
+}
 
 /*Contains .clear-delete and .input-buttons*/
 .input-container{

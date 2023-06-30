@@ -49,12 +49,42 @@ function operate(a, operator, b){
   }
 }
 
-var display = []; // Stores display output
+var display = []; // Stores display output, default 0.
 
-var currentInput = ""; // Stores current input to be added to display
-
-function updateDisplay(){
-  
+// Process user input for updating display
+function userInput(button){
+  let input = button.target.id // ID of Button. Type: string
+  if(input != '=' && input != 'CLEAR' && input != 'DELETE'){
+    display.push(input);
+    console.log(display);
+  } else if(input == '='){
+    evaluate(display);
+  }
+  updateDisplay(display) // Show update on display.
 }
 
-document.getElementsByClassName("button").addEventListener("click", updateDisplay());
+// Updates display based on display[]
+function updateDisplay(display){
+  let output = '';
+  if(display.length == 0){
+    output = '0';
+  } else{
+    output = display.join(""); // convert display to string as output
+  }
+  console.log(output);
+}
+
+// Evaluates display[] math and updates display accordingly. 
+function evaluate(display){
+
+}
+
+/*Adds on click event listener to all buttons*/
+const btns = document.querySelectorAll("button");
+
+btns.forEach((button)=>{
+  button.addEventListener("click", (button) => {
+    userInput(button);
+  })
+});
+

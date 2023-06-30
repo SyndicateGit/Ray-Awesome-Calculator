@@ -33,21 +33,23 @@ function divide(a, b){
 function operate(a, operator, b){
   switch(operator){
     case '+':
-      add(a, b);
+      return add(a, b);
       break;
     case '-':
-      subtract(a, b);
+      return subtract(a, b);
       break;
     case 'x':
-      multiply(a, b);
+      return multiply(a, b);
       break;
     case '%':
-      divide(a, b);  
+      return divide(a, b);  
       break;
+    default:
+      console.log("Something went wrong");
   }
 }
 
-var display = []; // Stores display output, default 0.
+display = []; // Stores display output, default 0.
 
 // Retruns true if string is a number
 function isNum(char){
@@ -85,25 +87,57 @@ function updateDisplay(display){
 }
 
 // Evaluates display[] math and updates display accordingly. 
-function evaluate(display){
+function evaluate(locDisplay){
 
   //Error if beginning and end aren't integers (are operator) Also catches only 1 operator input = Error. 
-  if(!isNum(display[0]) || !isNum(display.slice(-1))){
+  if(!isNum(locDisplay[0]) || !isNum(locDisplay.slice(-1))){
     errorMessage();
     return;
   }
   //Error if consecutive operators found
-  else if(consecutiveOp(display)){
+  else if(consecutiveOp(locDisplay)){
     errorMessage();
   }else{
+    let displayJ = joinDisplayIntegers(locDisplay);
+    console.log(displayJ)
+    let currA = evaluateOp(displayJ, 1, displayJ[0]);
+    console.log(currA);
+    let currInd = 3
+    while(currInd < displayJ.length){
+      currA = evaluateOp(displayJ, currInd, currA);
+      currInd += 2;
+    }
+    updateDisplay([currA]);
 
+    display=currA.toString().split("");
   }
 }
 
+// Joines the integer portion of display into one element and return the output.
 function joinDisplayIntegers(display){
   output = []
   currentInt = ''
-  
+  for(i = 0; i < display.length; i++){
+    if(isNum(display[i])){
+      currentInt += display[i];
+    } else{
+      output.push(currentInt);
+      currentInt='';
+      output.push(display[i]) // Operator
+    }
+  }
+  if (currentInt != ''){
+    output.push(currentInt);
+  }
+  return output;
+}
+
+// Evaluates the operation at index of operator and returns the answer.
+function evaluateOp(display, indexOfOp, a){
+  let operator = display[indexOfOp];
+  let b = parseInt(display[indexOfOp + 1]);
+
+  return operate(a, operator, b);
 }
 
 function consecutiveOp(display){

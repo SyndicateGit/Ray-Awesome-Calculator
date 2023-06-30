@@ -49,6 +49,10 @@ function operate(a, operator, b){
 
 var display = []; // Stores display output, default 0.
 
+// Retruns true if string is a number
+function isNum(char){
+  return /^\d$/.test(char);
+}
 
 // Process user input for updating display
 function userInput(button){
@@ -56,14 +60,16 @@ function userInput(button){
   if(input != '=' && input != 'CLEAR' && input != 'DELETE'){
     display.push(input);
     console.log(display);
+    updateDisplay(display) 
   } else if(input == '='){
     evaluate(display);
   } else if (input == 'CLEAR'){
     clear();
+    updateDisplay(display) 
   } else if (input == "DELETE"){
     Delete();
+    updateDisplay(display) 
   }
-  updateDisplay(display) // Show update on display.
 }
 
 // Updates display based on display[]
@@ -74,13 +80,51 @@ function updateDisplay(display){
   } else{
     output = display.join(""); // convert display to string as output
   }
-  span = document.querySelector(".lower-display");
+  let span = document.querySelector(".lower-display");
   span.innerHTML = output;
 }
 
 // Evaluates display[] math and updates display accordingly. 
 function evaluate(display){
 
+  //Error if beginning and end aren't integers (are operator) Also catches only 1 operator input = Error. 
+  if(!isNum(display[0]) || !isNum(display.slice(-1))){
+    errorMessage();
+    return;
+  }
+  //Error if consecutive operators found
+  else if(consecutiveOp(display)){
+    errorMessage();
+  }else{
+
+  }
+}
+
+function joinDisplayIntegers(display){
+  output = []
+  currentInt = ''
+  
+}
+
+function consecutiveOp(display){
+  for(i = 0; i < display.length - 1; i++){
+    if(!isNum(display[i])){
+      if(!isNum(display[i+1])){
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function errorMessage(){
+  let spanLower = document.querySelector(".lower-display");
+  let spanUpper = document.querySelector(".upper-display");
+
+  spanUpper = display.join("");
+  spanLower.innerHTML = "ERROR";
+  console.log(spanLower)
+  display = []; // Resets display[] after error.
 }
 
 // Clears display[] and updates display

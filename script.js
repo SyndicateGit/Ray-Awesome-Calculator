@@ -29,6 +29,11 @@ function divide(a, b){
   return a / b;
 }
 
+function decimal(a, b){
+  b_length = ('' + b).length;
+  return a + b * Math.pow(10, 0 - b_length);
+}
+
 /*Calls Math Function based on operator*/
 function operate(a, operator, b){
   switch(operator){
@@ -43,6 +48,9 @@ function operate(a, operator, b){
       break;
     case '%':
       return divide(a, b);  
+      break;
+    case '.':
+      return decimal(a, b);
       break;
     default:
       console.log("Something went wrong");

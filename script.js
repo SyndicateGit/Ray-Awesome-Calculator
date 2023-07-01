@@ -116,9 +116,8 @@ function evaluate(locDisplay){
     while(displayJ.includes('.')){
       index = displayJ.indexOf('.');
       decimalNum = evaluateOp(displayJ, index, displayJ[index-1]);
-      console.log(decimalNum);
       displayJ.splice(index - 1, 3, decimalNum);
-      console.log(displayJ);
+      console.log(displayJ)
     }
     
     while(displayJ.includes('x')){
@@ -141,7 +140,7 @@ function evaluate(locDisplay){
       num = evaluateOp(displayJ, index, displayJ[index-1]);
       displayJ.splice(index - 1, 3, num);
     }
-    
+
     updateDisplay(displayJ);
     display=displayJ[0].toString().split("");
   }
@@ -156,22 +155,21 @@ function joinDisplayIntegers(display){
     if(isNum(display[i])){
       currentInt += display[i];
     } else{
-      output.push(parseInt(currentInt));
+      output.push(parseFloat(currentInt));
       currentInt='';
       output.push(display[i]) // Operator
     }
   }
   if (currentInt != ''){
-    output.push(parseInt(currentInt));
+    output.push(parseFloat(currentInt));
   }
-  console.log(output);
   return output;
 }
 
 // Evaluates the operation at index of operator and returns the answer.
 function evaluateOp(display, indexOfOp, a){
   let operator = display[indexOfOp];
-  let b = parseInt(display[indexOfOp + 1]);
+  let b = parseFloat(display[indexOfOp + 1]);
   return operate(a, operator, b);
 }
 
@@ -194,7 +192,6 @@ function errorMessage(){
 
   spanUpper = display.join("");
   spanLower.innerHTML = "ERROR";
-  console.log(spanLower)
   display = []; // Resets display[] after error.
 }
 

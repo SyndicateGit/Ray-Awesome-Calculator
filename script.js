@@ -31,7 +31,7 @@ function divide(a, b){
 
 function decimal(a, b){
   b_length = ('' + b).length;
-  return a + b * Math.pow(10, 0 - b_length);
+  return a + b * (10**(0-b_length));
 }
 
 /*Calls Math Function based on operator*/
@@ -107,20 +107,46 @@ function evaluate(locDisplay){
   else if(consecutiveOp(locDisplay)){
     errorMessage();
   }else{
+    // Currently Sequentially evaluates operators without respecting BEDMAS. 
     let displayJ = joinDisplayIntegers(locDisplay);
     console.log(displayJ)
-    let currA = evaluateOp(displayJ, 1, displayJ[0]);
-    console.log(currA);
-    let currInd = 3
-    while(currInd < displayJ.length){
-      currA = evaluateOp(displayJ, currInd, currA);
-      currInd += 2;
+    //display J datatype:[int, 'operator', int, 'operator', int]
+    // Idea: while loop occurances of ., evaluate, make new list with decimal integer spliced in. Then do for x, %. Then evaluate rest. 
+    
+    while(displayJ.includes('.')){
+      index = displayJ.indexOf('.');
+      decimalNum = evaluateOp(displayJ, index, displayJ[index-1]);
+      console.log(decimalNum);
+      displayJ.splice(index - 1, 3, decimalNum);
+      console.log(displayJ);
     }
-    updateDisplay([currA]);
-
-    display=currA.toString().split("");
+    
+    while(displayJ.includes('x')){
+      index = displayJ.indexOf('x');
+      product = evaluateOp(displayJ, index, displayJ[index-1]);
+      displayJ.splice(index - 1, 3, product);
+    }
+    while(displayJ.includes('%')){
+      index = displayJ.indexOf('%');
+      num = evaluateOp(displayJ, index, displayJ[index-1]);
+      displayJ.splice(index - 1, 3, num);
+    }
+    while(displayJ.includes('+')){
+      index = displayJ.indexOf('+');
+      sum = evaluateOp(displayJ, index, displayJ[index-1]);
+      displayJ.splice(index - 1, 3, sum);
+    }
+    while(displayJ.includes('-')){
+      index = displayJ.indexOf('-');
+      num = evaluateOp(displayJ, index, displayJ[index-1]);
+      displayJ.splice(index - 1, 3, num);
+    }
+    
+    updateDisplay(displayJ);
+    display=displayJ[0].toString().split("");
   }
 }
+
 
 // Joines the integer portion of display into one element and return the output.
 function joinDisplayIntegers(display){
@@ -128,7 +154,6 @@ function joinDisplayIntegers(display){
   currentInt = ''
   for(i = 0; i < display.length; i++){
     if(isNum(display[i])){
-      console.log("here");
       currentInt += display[i];
     } else{
       output.push(parseInt(currentInt));
@@ -147,7 +172,6 @@ function joinDisplayIntegers(display){
 function evaluateOp(display, indexOfOp, a){
   let operator = display[indexOfOp];
   let b = parseInt(display[indexOfOp + 1]);
-
   return operate(a, operator, b);
 }
 

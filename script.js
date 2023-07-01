@@ -8,8 +8,6 @@ Raymond's Calculator Project Requirements:
 accepting inputs for further calculations.
 8) Invalid input equation returns ERROR on display. 
 9) Decimal numbers are allowed.
-10) Cannot have 10.4.5 (disable decimal when one is active).
-11) Add keyboard support
 */
 
 /*Basic Math Functions */

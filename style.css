@@ -24,7 +24,7 @@ body{
 
 .calculator-frame{
   /*Colour*/
-  background-color: lightgray;
+  background-color: lightblue;
 
   /*Dimension*/
   height: 700px;
@@ -80,7 +80,7 @@ body{
 /*Contains .clear-delete and .input-buttons*/
 .input-container{
   /*Colour*/
-  background-color: lightgray;
+  background-color: lightblue;
 
   /*Alignment*/
   display: flex;

@@ -141,8 +141,10 @@ function evaluate(locDisplay){
       displayJ.splice(index - 1, 3, num);
     }
 
-    updateDisplay(displayJ);
-    display=displayJ[0].toString().split("");
+    newDisplay = parseFloat(displayJ[0].toFixed(6)).toString()
+    updateDisplay([newDisplay]);
+    display=newDisplay.split("")
+
   }
 }
 

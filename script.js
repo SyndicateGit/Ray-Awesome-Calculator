@@ -60,9 +60,10 @@ function isNum(char){
 function userInput(button){
   let input = button.target.id // ID of Button. Type: string
   if(input != '=' && input != 'CLEAR' && input != 'DELETE'){
-    display.push(input);
+    display.push(input)
     console.log(display);
     updateDisplay(display) 
+
   } else if(input == '='){
     evaluate(display);
   } else if (input == 'CLEAR'){
@@ -119,16 +120,18 @@ function joinDisplayIntegers(display){
   currentInt = ''
   for(i = 0; i < display.length; i++){
     if(isNum(display[i])){
+      console.log("here");
       currentInt += display[i];
     } else{
-      output.push(currentInt);
+      output.push(parseInt(currentInt));
       currentInt='';
       output.push(display[i]) // Operator
     }
   }
   if (currentInt != ''){
-    output.push(currentInt);
+    output.push(parseInt(currentInt));
   }
+  console.log(output);
   return output;
 }
 
@@ -140,6 +143,7 @@ function evaluateOp(display, indexOfOp, a){
   return operate(a, operator, b);
 }
 
+// Detects if input has consecutive operators (invalid)
 function consecutiveOp(display){
   for(i = 0; i < display.length - 1; i++){
     if(!isNum(display[i])){
@@ -151,6 +155,7 @@ function consecutiveOp(display){
   return false;
 }
 
+// Display Error message and resets input
 function errorMessage(){
   let spanLower = document.querySelector(".lower-display");
   let spanUpper = document.querySelector(".upper-display");
@@ -172,6 +177,7 @@ function Delete(){
   display.pop();
   updateDisplay(display);
 }
+
 /*Adds on click event listener to all buttons*/
 const btns = document.querySelectorAll("button");
 
